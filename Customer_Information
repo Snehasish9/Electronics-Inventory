@@ -1,0 +1,180 @@
+import java.awt.BorderLayout;
+import java.sql.*;
+import java.awt.EventQueue;
+import net.proteanit.sql.DbUtils;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
+import java.awt.Font;
+
+import javax.swing.SwingConstants;
+import javax.swing.JTable;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+
+public class Customer_Information extends JFrame {
+
+	private JPanel contentPane;
+	private JTable table;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Customer_Information frame = new Customer_Information();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */Connection connection=null;
+	private JTextField Customer_ID;
+	public Customer_Information() {
+		
+		try {
+			//Class.forName("com.mysql.cj.jdbc.Driver");
+			 connection=DriverManager.getConnection("jdbc:mysql://localhost:3306/database_1", "root", "Snehasish@123");
+			//JOptionPane.showMessageDialog(null,"database connected");
+			
+			
+		}  catch (Exception exception) {
+            exception.printStackTrace();
+        }
+		
+		
+		
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(200, 100, 1000, 600);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("Customer Information");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 29));
+		lblNewLabel.setBounds(23, 10, 897, 56);
+		contentPane.add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("__________________________________________________________________________________________");
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1.setBounds(10, 63, 966, 13);
+		contentPane.add(lblNewLabel_1);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(222, 125, 705, 403);
+		contentPane.add(scrollPane);
+		
+		table = new JTable();
+		scrollPane.setViewportView(table);
+		
+		JLabel lblNewLabel_2 = new JLabel("FILTER");
+		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblNewLabel_2.setBounds(35, 152, 146, 29);
+		contentPane.add(lblNewLabel_2);
+		
+		JButton btnNewButton = new JButton("Back");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				 Shop back = new Shop();
+				 back.setVisible(true);
+				 dispose();
+			}
+		});
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		btnNewButton.setBounds(23, 499, 110, 29);
+		contentPane.add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("Refresh");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+
+				 try {
+
+
+
+					 String query_= "Select * from purchase_info ";
+					
+					 PreparedStatement pst_= connection.prepareStatement(query_);
+					 ResultSet rs=pst_.executeQuery();
+
+					 table.setModel(DbUtils.resultSetToTableModel(rs));
+
+
+
+				 }  catch (Exception exception) {
+					 exception.printStackTrace();
+				 }
+				
+				
+				
+				
+			
+				
+				
+				
+			}
+		});
+		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnNewButton_1.setBounds(816, 76, 111, 31);
+		contentPane.add(btnNewButton_1);
+		
+		JLabel lblNewLabel_3 = new JLabel(" Enter Customer ID-");
+		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_3.setBounds(23, 207, 172, 29);
+		contentPane.add(lblNewLabel_3);
+		
+		Customer_ID = new JTextField();
+		Customer_ID.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		Customer_ID.setBounds(35, 242, 146, 29);
+		contentPane.add(Customer_ID);
+		Customer_ID.setColumns(10);
+		
+		JButton btnNewButton_2 = new JButton("Submit");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+
+
+
+					 String query= "Select * from purchase_info where Customer_ID='"+Customer_ID.getText()+"'  ";
+					 PreparedStatement pst= connection.prepareStatement(query);
+					 ResultSet rs=pst.executeQuery();
+
+					 table.setModel(DbUtils.resultSetToTableModel(rs));
+
+					 JOptionPane.showMessageDialog(null,"Filtered");
+
+				 }  catch (Exception exception) {
+					 exception.printStackTrace();
+				 }
+				
+				
+				
+			}
+		});
+		btnNewButton_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnNewButton_2.setBounds(34, 290, 99, 29);
+		contentPane.add(btnNewButton_2);
+	}
+}

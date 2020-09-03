@@ -20,6 +20,7 @@ import javax.swing.JScrollBar;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JScrollPane;
+import javax.swing.ImageIcon;
 
 public class Purchase_Order extends JFrame {
 
@@ -80,6 +81,7 @@ public class Purchase_Order extends JFrame {
 		 contentPane.setLayout(null);
 
 		 JButton btnPrintRecipt = new JButton("PRINT INVOICE");
+		 btnPrintRecipt.setIcon(new ImageIcon("C:\\Users\\acer\\Desktop\\Project Images\\Printer-icon.png"));
 		 btnPrintRecipt.setFont(new Font("Tahoma", Font.BOLD, 15));
 		 btnPrintRecipt.addActionListener(new ActionListener() {
 			 public void actionPerformed(ActionEvent arg0) {
@@ -116,7 +118,7 @@ public class Purchase_Order extends JFrame {
 				 dispose();
 			 }
 		 });
-		 btnPrintRecipt.setBounds(1042, 597, 171, 34);
+		 btnPrintRecipt.setBounds(1013, 597, 200, 34);
 		 contentPane.add(btnPrintRecipt);
 
 		 btnBack = new JButton("Back");

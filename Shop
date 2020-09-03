@@ -1,10 +1,12 @@
 import java.awt.BorderLayout;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JSeparator;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -12,11 +14,14 @@ import javax.swing.JOptionPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
+import java.awt.Image;
+
 import javax.swing.SwingConstants;
 
 public class Shop extends JFrame {
 
 	private JPanel contentPane;
+	JLabel lblNewLabel;
 
 	/**
 	 * Launch the application.
@@ -58,7 +63,7 @@ public class Shop extends JFrame {
 				
 			}
 		});
-		btnNewButton_1.setBounds(61, 255, 195, 90);
+		btnNewButton_1.setBounds(33, 255, 195, 90);
 		contentPane.add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("CUSTOMER INFORMATION");
@@ -70,7 +75,7 @@ public class Shop extends JFrame {
 				dispose();
 			}
 		});
-		btnNewButton_2.setBounds(61, 393, 266, 85);
+		btnNewButton_2.setBounds(33, 393, 266, 85);
 		contentPane.add(btnNewButton_2);
 		
 		JButton btnNewButton_3 = new JButton("LOG OUT");
@@ -87,7 +92,7 @@ public class Shop extends JFrame {
 				
 			}
 		});
-		btnNewButton_3.setBounds(766, 493, 107, 35);
+		btnNewButton_3.setBounds(840, 518, 107, 35);
 		contentPane.add(btnNewButton_3);
 		
 		JLabel lblElectronicShop = new JLabel("ELECTRONICS INVENTORY");
@@ -105,8 +110,14 @@ public class Shop extends JFrame {
 				stock.setVisible(true);
 			}
 		});
-		btnNewButton.setBounds(61, 131, 195, 79);
+		btnNewButton.setBounds(33, 131, 195, 79);
 		contentPane.add(btnNewButton);
+		
+	    lblNewLabel = new JLabel("");
+	    Image image= new ImageIcon(this.getClass().getResource("68725675.jpg")).getImage();
+	    lblNewLabel.setIcon(new ImageIcon(image));
+		lblNewLabel.setBounds(326, 94, 621, 384);
+		contentPane.add(lblNewLabel);
 		this.setLocationRelativeTo(null);
 	}
 }
